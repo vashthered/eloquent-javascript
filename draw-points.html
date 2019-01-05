@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Draw points</title>
+  </head>
+  <style>
+    * {padding: 0; margin: 0;}
+    html, body {width: 100%; height: 100vh;}
+    body {position: relative;}
+    .dot {position: absolute; border-radius: 50%; background: #000;}
+  </style>
+  <body>
+
+  <script type="text/javascript">
+
+    function drawPoints(node, dimension) {
+
+      node.addEventListener("click", function(e){
+
+        var dot = document.createElement("div");
+
+        dot.className = "dot";
+
+        dot.style.width = dimension + "px";
+
+        dot.style.height = dimension + "px";
+
+        dot.style.left = (e.pageX - dimension / 2) + "px";
+
+        dot.style.top = (e.pageY - dimension / 2) + "px";
+
+        node.appendChild(dot);
+
+        e.stopPropagation();
+        
+      });
+    }
+
+    drawPoints(document.body, 20);
+
+  </script>
+
+  </body>
+</html>
