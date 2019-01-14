@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Censored keyboard</title>
+  </head>
+  <style>
+    * {padding: 0; margin: 0;}
+    body {font-family: monospace; padding: 15px;}
+  </style>
+  <body>
+
+  <h1>Censured keyboard</h1>
+  <p>You cannot digit "W", "Q" and "X".</p>
+  <br>
+
+  <input type="text">
+
+  <script type="text/javascript">
+
+    var input = document.querySelector("input");
+
+    input.addEventListener("keypress", function(e){
+      if (e.which == 81 || e.which == 87 || e.which == 88) {
+        e.preventDefault();
+      }
+    })
+
+  </script>
+
+  </body>
+</html>
