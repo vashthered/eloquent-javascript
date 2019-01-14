@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mouse Trail</title>
+
+  <style>
+    * {padding: 0; margin: 0;}
+    body {font-family: monospace; padding: 15px;}
+    .trail {
+      position: absolute;
+      height: 6px; width: 6px;
+      border-radius: 3px;
+      background: #f00;
+    }
+    </style>
+
+  </head>
+  <body>
+
+  <h1>Mouse trail</h1>
+
+  <script type="text/javascript">
+
+    var dots = [];
+
+    for (let i = 0; i < 25; i ++) {
+      var dot = document.createElement("div");
+      dot.className = "trail";
+      document.body.appendChild(dot);
+      dots.push(dot);
+    }
+
+    var currentDot = 0;
+
+    window.addEventListener("mousemove", function(e){
+      dots[currentDot].style.top = (e.pageY - 3) + "px";
+      dots[currentDot].style.left = (e.pageX - 3) + "px";
+      currentDot = (currentDot + 1) % dots.length;
+    });
+
+  </script>
+
+  </body>
+</html>
