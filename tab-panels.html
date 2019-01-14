@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tab panels</title>
+  </head>
+  <style>
+    * {padding: 0; margin: 0;}
+    html, body {width: 100%; height: 100vh;}
+    body {position: relative; font-family: monospace;}
+    h1 {font-size: 20px; margin: 10px;}
+    .active {color: #f0f;}
+    .tab-label {display: inline-block; padding: 10px; background: #f0f0f0; cursor: pointer; border-right: 1px solid #fff; min-width: 70px;}
+    [data-tabname] {padding: 10px;}
+  </style>
+  <body>
+
+  <h1>Tab panels</h1>
+
+  <div class="tab">
+   <div data-tabname="one">Tab one</div>
+   <div data-tabname="two">Tab two</div>
+   <div data-tabname="three">Tab three</div>
+  </div>
+
+  <script type="text/javascript">
+
+  function asTabs(node) {
+
+    //Create labels container
+    var tabLabels = document.createElement("div");
+    tabLabels.className = "tab-labels";
+
+    //Foreach child of node
+    for (let i = 0; i < node.childNodes.length; i++) {
+
+      //If it's an html element
+      if (node.childNodes[i].nodeType == 1){
+
+        //Create labels
+        var tabLabel = document.createElement("span");
+        //Add classname
+        tabLabel.className = "tab-label";
+        var tabname = node.childNodes[i].dataset.tabname;
+        //Set href
+        tabLabel.setAttribute("href", tabname);
+        //Set text
+        tabLabel.innerText = tabname;
+        //Append every label into the label container
+        tabLabels.appendChild(tabLabel);
+
+        //Hide all tab body
+        node.childNodes[i].style.display = "none";
+
+      }
+
+    }
+
+    //Insert label container into tab div
+    node.insertBefore(tabLabels, node.childNodes[0]);
+
+    //Iterate tab label click
+    var labels = document.querySelectorAll(".tab-label");
+
+    labels.forEach(function(el, index){
+
+      labels[index].addEventListener("click", function(){
+
+        var hideTabs = document.querySelectorAll("[data-tabname]");
+
+        for (let i = 0; i < hideTabs.length; i ++) {
+          hideTabs[i].style.display = "none";
+          labels[i].classList.remove("active");
+        }
+
+        this.classList.add("active");
+
+        var labelCoords = labels[index].getAttribute("href");
+
+        document.querySelector("[data-tabname='" + labelCoords + "']").style.display = "block";
+
+      });
+    })
+
+    //Display the first tab content and active the first label
+    tabLabels.childNodes[0].classList.add("active");
+    document.querySelector("[data-tabname]").style.display = "block";
+
+  }
+
+  asTabs(document.querySelector(".tab"));
+
+
+  </script>
+
+  </body>
+</html>
