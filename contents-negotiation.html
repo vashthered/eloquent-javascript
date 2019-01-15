@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contents negotiation</title>
+    <style>
+      * {padding: 0; margin: 0;}
+      html, body {width: 100%; height: 100vh;}
+      body {position: relative; font-family: monospace;}
+      h1 {font-size: 20px; margin: 10px 10px 0;}
+      main {padding: 10px;}
+    </style>
+  </head>
+
+  <body>
+
+  <h1>Contents negotiation</h1>
+
+  <main></main>
+
+  <script type="text/javascript">
+
+    var requestFormat = ["text/plain", "text/html", "application/json", "application/rainbows+unicorns"];
+
+    function requestFile(url, func) {
+      var req = new XMLHttpRequest();
+      req.open("GET", url, true);
+      req.setRequestHeader("Accept", requestFormat[0]);
+      req.addEventListener("load", function(){
+        if (req.status < 400) {
+          func(req.responseText);
+        }
+      });
+      req.send();
+    }
+
+    function print(arg) {
+      var main = document.querySelector("main");
+      main.innerHTML = arg;
+    }
+
+    requestFile("https://eloquentjavascript.net/author", print);
+
+  </script>
+
+  </body>
+</html>
