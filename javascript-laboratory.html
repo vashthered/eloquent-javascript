@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Javascript laboratory</title>
+    <style>
+      * {padding: 0; margin: 0;}
+      html, body {width: 100%; height: 100vh;}
+      body {font-family: monospace;}
+      h1 {font-size: 20px; margin: 10px 10px 0;}
+      textarea {width: 400px; height: 300px; padding: 10px; font-family: monospace;}
+      .result {border: 1px solid #333; padding: 10px;}
+    </style>
+  </head>
+
+  <body>
+
+  <h1>Javascript laboratory</h1>
+
+  <textarea name="text" rows="10"></textarea>
+
+  <button>Esecute js</button>
+
+  <div class="result"></div>
+
+  <script type="text/javascript">
+
+    var btn = document.querySelector("button");
+    var textarea = document.querySelector("textarea");
+    var result = document.querySelector(".result");
+
+    btn.addEventListener("click", function(){
+
+      var code = textarea.value;
+      try {
+        var res = Function(code)();
+        result.innertText = res;
+      }
+        catch(error) {
+          result.innerText = "Error: " + error;
+        }
+
+      });
+
+  </script>
+
+  </body>
+</html>

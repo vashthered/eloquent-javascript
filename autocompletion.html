@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Autocompletion</title>
+    <style>
+      * {padding: 0; margin: 0;}
+      html, body {width: 100%; height: 100vh;}
+      body {font-family: monospace;}
+      h1 {font-size: 20px; margin: 10px;}
+      #suggestions {background: #fff; position: absolute; top: 100%; left: 0; right: 0;}
+      #suggestions span {padding: 5px; border-bottom: 1px solid #ddd; display: block; cursor: pointer;}
+      .container {width: 200px; position: relative;}
+      input {display: block; width: 100%;}
+
+    </style>
+  </head>
+
+  <body>
+
+  <h1>Autocompletion</h1>
+  <div class="container">
+  <input type="text">
+
+  <div id="suggestions"></div>
+  </div>
+
+  <script>
+
+  var terms = [];
+  for (name in window) {
+    terms.push(name);
+  }
+
+  var input = document.querySelector("input");
+  var suggestions = document.querySelector("#suggestions");
+
+  input.addEventListener("input", function(e){
+
+    suggestions.innerHTML = "";
+
+    var string = this.value;
+
+    if (string == "") {
+      return;
+    }
+
+    //Build suggestion box
+
+    terms.forEach(function(el){
+
+      if (el.indexOf(string) == 0) {
+
+        var suggest = document.createElement("span");
+        suggest.innerText = el;
+        suggest.addEventListener("click", getText);
+        suggestions.appendChild(suggest);
+
+      }
+
+    });
+
+  });
+
+  function getText() {
+    input.value = this.innerText;
+    suggestions.innerHTML = "";
+  }
+
+  </script>
+
+  </body>
+</html>
